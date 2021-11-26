@@ -21,10 +21,10 @@ const authCtr = {
 
     const user = new User({
       useremail: useremail,
-      grade : 'basic',
-      balance : 0,
-      connected : false,
-      class : 'user',
+      grade: "basic",
+      balance: 0,
+      connected: false,
+      class: "user",
     });
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -33,28 +33,28 @@ const authCtr = {
 
     const apiKey = new ApiKey({
       useremail: useremail,
-      bithumbC: '',
-      bithumbS: '',
-      upbitC : '', 
-      upbitS : '', 
-      coinoneC : '', 
-      coinoneS : '', 
-      korbitC : '', 
-      korbitS : '', 
-      binanceC : '',
-      binanceS : '',
-      huobiC : '',
-      huobiS : '',
-      bitfinexC : '', 
-      bitfinexS : '', 
-      bitflyerC: '',
-      bitflyerS: '',
+      bithumbC: "",
+      bithumbS: "",
+      upbitC: "",
+      upbitS: "",
+      coinoneC: "",
+      coinoneS: "",
+      korbitC: "",
+      korbitS: "",
+      binanceC: "",
+      binanceS: "",
+      huobiC: "",
+      huobiS: "",
+      bitfinexC: "",
+      bitfinexS: "",
+      bitflyerC: "",
+      bitflyerS: "",
     });
     await apiKey.save();
 
     const algorithm = new Algorithm({
       useremail: useremail,
-      data: '',
+      data: "",
     });
     await algorithm.save();
 
@@ -70,7 +70,7 @@ const authCtr = {
       {
         expiresIn: "7d",
       }
-    );    
+    );
     res
       .cookie("access_token", token, {
         httpOnly: true,
@@ -79,7 +79,7 @@ const authCtr = {
       .json({
         status: 200,
         result: true,
-        msg  :"register successed",
+        msg: "register successed",
         token: token,
       });
   },
@@ -96,60 +96,60 @@ const authCtr = {
       return;
     }
     const valid = await bcrypt.compare(password, user.password);
-    if (!valid){
-        res.json({
-          status: 501,
-          result: false,
-          msg: "password error",
-        });
-        return;
+    if (!valid) {
+      res.json({
+        status: 501,
+        result: false,
+        msg: "password error",
+      });
+      return;
     }
-      const data = user.toJSON();
+    const data = user.toJSON();
 
-      delete data.password;
+    delete data.password;
 
-      const token = jwt.sign(
-        {
-          _id: data._id,
-          useremail: data.useremail,
-        },
-        secretKey.key,
-        {
-          expiresIn: "7d",
-        }
-      );
+    const token = jwt.sign(
+      {
+        _id: data._id,
+        useremail: data.useremail,
+      },
+      secretKey.key,
+      {
+        expiresIn: "7d",
+      }
+    );
 
-      const keyExist = await ApiKey.findOne({ useremail: useremail });
-      const algoExist = await Algorithm.findOne({ useremail: useremail });
+    const keyExist = await ApiKey.findOne({ useremail: useremail });
+    const algoExist = await Algorithm.findOne({ useremail: useremail });
 
-      res
-        .cookie("access_token", token, {
-          httpOnly: true,
-          maxAge: 1000 * 60 * 60 * 24 * 7,
-        })
-        .json({
-          status: 200,
-          result: true,
-          token: token,
-          class : user.class,
-          grade : user.grade,
-          connected : user.connected,
-          balance : user.balance,
-          keys : keyExist,
-          data : algoExist,
-        });
+    res
+      .cookie("access_token", token, {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+      })
+      .json({
+        status: 200,
+        result: true,
+        token: token,
+        class: user.class,
+        grade: user.grade,
+        connected: user.connected,
+        balance: user.balance,
+        keys: keyExist,
+        data: algoExist,
+        version: "v2.0.1",
+      });
   },
   logout: async (req, res) => {
-
     const token = req.headers.access_token;
 
-    if(!token ){
+    if (!token) {
       res.status(400).json({
         status: 400,
         result: false,
         msg: "token error",
-      })
-      return ; 
+      });
+      return;
     }
 
     window.localStorage.removeItem("access_token");
@@ -167,36 +167,34 @@ const authCtr = {
       });
   },
   changePW: async (req, res, next) => {
-
     const { password } = req.body;
 
     const hashedInputPassword = await bcrypt.hash(password, 10);
     const token = req.headers.access_token;
 
-    if(!token){
+    if (!token) {
       res.status(400).json({
         status: 400,
         result: false,
         msg: "token error",
-      })
-      return ; 
-    }else{
-      try {
-      const decoded = jwt.verify(token, "tmctmc");
-
-      const update = { password:  hashedInputPassword};
-
-      await User.findOneAndUpdate({ useremail: decoded.useremail }, update);
-      res.status(200).json({
-        status: 200,
-        result: true,
-        msg: "change pw success",
       });
+      return;
+    } else {
+      try {
+        const decoded = jwt.verify(token, "tmctmc");
+
+        const update = { password: hashedInputPassword };
+
+        await User.findOneAndUpdate({ useremail: decoded.useremail }, update);
+        res.status(200).json({
+          status: 200,
+          result: true,
+          msg: "change pw success",
+        });
       } catch (e) {
         res.status(500).send("error!");
       }
     }
-    
   },
   mypage: async (req, res, next) => {
     const token = req.headers.access_token;
@@ -209,17 +207,16 @@ const authCtr = {
     }
   },
   userInfo: async (req, res, next) => {
-
     const token = req.headers.access_token;
     let useremail1 = "";
 
-    if(!token){
+    if (!token) {
       res.status(400).json({
         status: 400,
         result: false,
         msg: "token error",
-      })
-      return ; 
+      });
+      return;
     }
 
     try {
@@ -240,37 +237,33 @@ const authCtr = {
         msg: "no user",
       });
       return;
-    }else {
-      res
-      .status(200)
-      .json({
+    } else {
+      res.status(200).json({
         status: 200,
         result: true,
-        usereamil : useremail1 ,
-        grade : user.grade,
-        connected : user.connected,
-        balance : user.balance,
-        keys : keyExist,
-        data : algoExist,
-        class : user.class,
+        usereamil: useremail1,
+        grade: user.grade,
+        connected: user.connected,
+        balance: user.balance,
+        keys: keyExist,
+        data: algoExist,
+        class: user.class,
       });
     }
   },
   grading: async (req, res, next) => {
-
     const token = req.headers.access_token;
     let useremail1 = "";
-    
 
     const { balance } = req.body;
 
-    if(!token){
+    if (!token) {
       res.status(400).json({
         status: 400,
         result: false,
         msg: "token error",
-      })
-      return ; 
+      });
+      return;
     }
 
     try {
@@ -281,7 +274,7 @@ const authCtr = {
     }
 
     const user = await User.findOne({ useremail: useremail1 });
-    let grading = user.grade; 
+    let grading = user.grade;
 
     if (!user) {
       res.json({
@@ -290,31 +283,31 @@ const authCtr = {
         msg: "no user",
       });
       return;
-    }else {
-      
-      if(balance >500){
-        grading = 'gold'
-      }else if(balance >300){
-        grading = 'silver'
-      }else if(balance >100){
-        grading = 'bronze'
-      }else if(balance >= 0){
-        grading = 'basic'
+    } else {
+      if (balance > 500) {
+        grading = "gold";
+      } else if (balance > 300) {
+        grading = "silver";
+      } else if (balance > 100) {
+        grading = "bronze";
+      } else if (balance >= 0) {
+        grading = "basic";
       }
 
-      const update = { balance: balance, grade : grading , connected : true};
-      updateUser = await User.findOneAndUpdate({ useremail: useremail1 }, update)
-      res
-        .status(200)
-        .json({
-          status: 200,
-          result: true,
-          usereamil : useremail1 ,
-          grade : grading,
-          balance : balance,
-          connected : true,
-        });   
-      
+      const update = { balance: balance, grade: grading, connected: true };
+      updateUser = await User.findOneAndUpdate(
+        { useremail: useremail1 },
+        update
+      );
+      res.status(200).json({
+        status: 200,
+        result: true,
+        usereamil: useremail1,
+        grade: grading,
+        balance: balance,
+        connected: true,
+      });
+
       // await User.findOneAndUpdate({ useremail: useremail1 }, update).then((_)=>{
       //   res
       //   .status(200)
@@ -325,9 +318,9 @@ const authCtr = {
       //     grade : user.grade,
       //     balance : user.balance,
       //     connected : true,
-      //   });   
+      //   });
       // });
-    }  
+    }
   },
 };
 
