@@ -10,12 +10,12 @@ router.get("/register", (req, res, next) => {
   res.send("TMC register");
 });
 
-router.get("/login", (req, res, next) => {
+router.get("/login2", (req, res, next) => {
   res.send("TMC login");
 });
 
 router.post("/register", authCtr.register);
-router.post("/login", authCtr.login);
+router.post("/login2", authCtr.login);
 router.get("/logout", authCtr.logout);
 router.post("/changepw", authCtr.changePW);
 router.get("/mypage", authCtr.mypage);
