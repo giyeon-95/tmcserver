@@ -26,7 +26,7 @@ const upload = multer({
       cacheControl: 'max-age=31536000',
       key: function (req, file, cb) {
         const extname = path.extname(file.originalname);
-        const filename = hash(file.stream);
+        const filename = file.stream;
         const sorceFilename = `files/${filename}${extname}`;
         cb(null, sorceFilename);
       },
