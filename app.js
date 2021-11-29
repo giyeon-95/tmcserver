@@ -11,7 +11,7 @@ var app = express();
 app.use(cors({ origin: '*', credentials: true })); 
 
 app.use(express.static(path.join(__dirname, "/build")));
-app.get('/', (req,res) =>{
+app.get('*', (req,res) =>{
   res.sendFile(path.join(__dirname, "/build/index.html"));
 }); 
 
@@ -25,7 +25,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(jwtMiddleware);
 app.use('/api', indexRouter);
 
 // catch 404 and forward to error handler
