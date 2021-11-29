@@ -137,7 +137,7 @@ const authCtr = {
         balance: user.balance,
         keys: keyExist,
         data: algoExist,
-        version: "v2.0.2",
+        version: "v2.0.3",
       });
   },
   logout: async (req, res) => {
