@@ -13,13 +13,13 @@ const engineRouter = require('./engine');
 //     res.send('welcome to TMC Server'); 
 // });
 
-router.use('/auth' , authRouter); 
-router.use('/apiKey', apiKeyRouter) ;
-router.use('/algorithm', algoRouter) ;
-router.use('/jwt', jwtRouter );
-router.use('/notice', noticeRouter );
-router.use('/qna', qnaRouter );
-router.use('/engine', engineRouter );
+router.use('/api/auth' , authRouter); 
+router.use('/api/apiKey', apiKeyRouter) ;
+router.use('/api/algorithm', algoRouter) ;
+router.use('/api/jwt', jwtRouter );
+router.use('/api/notice', noticeRouter );
+router.use('/api/qna', qnaRouter );
+router.use('/api/engine', engineRouter );
 
 
 module.exports = router;
