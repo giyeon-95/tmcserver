@@ -1,5 +1,6 @@
 const QnA = require("../model/qna"); 
 const jwt = require("jsonwebtoken");
+const moment = require('moment'); 
 
 const qnaCtr = {
   qnaList : async (req,res) =>{
@@ -37,6 +38,8 @@ const qnaCtr = {
         useremail : useremail1, 
         title : title, 
         content : content,
+        answered : false, 
+        comment : '',
     })
 
     await qna.save().then((_) => {
@@ -47,6 +50,38 @@ const qnaCtr = {
         });    
     }).catch((err) => {
         console.log(err);
+    });
+  },
+  createQnaComment: async (req, res) => {
+    let useremail1 = "";
+    const { _id ,content } = req.body;
+
+    const token = req.headers.access_token;
+
+    if(!token){
+      res.status(400).json({
+        status: 400,
+        result: false,
+        msg: "token error",
+      })
+      return ; 
+    }
+
+    try {
+      const decoded = jwt.verify(token, "tmctmc");
+      useremail1 = decoded.useremail;
+    } catch (e) {
+      console.log(e);
+    }
+
+    const update = { comments: content};
+
+    await QnA.findOneAndUpdate({_id : id }, update)
+
+    res.status(200).json({
+      status: 200,
+      result: true,
+      msg: "comment create success",
     });
   },
 };
