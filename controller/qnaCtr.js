@@ -87,7 +87,7 @@ const qnaCtr = {
       const update = {
         author : '관리자' ,
         content : content,
-        datetime : new Date().now,
+        datetime : Date.now(),
       };
       qna.comments.push(update);
       qna.save();
