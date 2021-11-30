@@ -54,7 +54,7 @@ const qnaCtr = {
   },
   createQnaComment: async (req, res) => {
     let useremail1 = "";
-    const { _id ,content } = req.body;
+    const { id ,content } = req.body;
 
     const token = req.headers.access_token;
 
