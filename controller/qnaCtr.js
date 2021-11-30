@@ -74,17 +74,28 @@ const qnaCtr = {
       console.log(e);
     }
 
-    const update = { comments: [{
-      author : '관리자',
-    }]};
+    const qna = await QnA.findOne({ _id: id });
 
-    await QnA.findOneAndUpdate({_id : id }, update)
-
-    res.status(200).json({
-      status: 200,
-      result: true,
-      msg: "comment create success",
-    });
+    if(!qna){
+      res.status(400).json({
+        status: 400,
+        result: false,
+        msg: "qna not exist",
+      })
+      return ; 
+    }else{
+      const update = {
+        author : '관리자' ,
+        content : content,
+        datetime : new Date().now,
+      };
+      qna.comments.push(update);
+      res.status(200).json({
+        status: 200,
+        result: true,
+        msg: "comment create success",
+      });
+    }
   },
 };
 
