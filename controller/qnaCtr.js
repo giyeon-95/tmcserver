@@ -90,7 +90,7 @@ const qnaCtr = {
         datetime : new Date().now,
       };
       qna.comments.push(update);
-      qna.save(done);
+      qna.save();
       res.status(200).json({
         status: 200,
         result: true,
