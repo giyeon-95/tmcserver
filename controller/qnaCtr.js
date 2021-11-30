@@ -39,7 +39,7 @@ const qnaCtr = {
         title : title, 
         content : content,
         answered : false, 
-        comments : [],
+        comments : [11],
     })
 
     await qna.save().then((_) => {
