@@ -6,7 +6,7 @@ const qnaSchema = new Schema ({
     title : String,
     content : String,
     answered : Boolean,
-    comments : String,
+    comments : Array,
 },{timestamps : true});
 
 module.exports= mongoose.model('qna', qnaSchema);

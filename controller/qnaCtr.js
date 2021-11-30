@@ -39,7 +39,7 @@ const qnaCtr = {
         title : title, 
         content : content,
         answered : false, 
-        comments : '',
+        comments : [],
     })
 
     await qna.save().then((_) => {
@@ -74,7 +74,9 @@ const qnaCtr = {
       console.log(e);
     }
 
-    const update = { comments: content};
+    const update = { comments: [{
+      author : '관리자',
+    }]};
 
     await QnA.findOneAndUpdate({_id : id }, update)
 
