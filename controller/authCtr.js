@@ -241,7 +241,7 @@ const authCtr = {
       res.status(200).json({
         status: 200,
         result: true,
-        usereamil: useremail1,
+        useremail: useremail1,
         grade: user.grade,
         connected: user.connected,
         balance: user.balance,
