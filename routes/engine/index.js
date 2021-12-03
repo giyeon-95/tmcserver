@@ -3,13 +3,10 @@ const engineCtr = require("../../controller/engineCtr");
 const router = express.Router();
 const multer = require("multer");
 var multerS3 = require("multer-s3");
-const dotenv = require('dotenv') ;
 const path = require ('path');
 const AWS = require('aws-sdk');
 
-dotenv.config();
-
-
+require('dotenv').config();
 
 const bucket = 'tmcproject' ;
 
