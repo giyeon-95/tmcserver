@@ -3,17 +3,22 @@ const engineCtr = require("../../controller/engineCtr");
 const router = express.Router();
 const multer = require("multer");
 var multerS3 = require("multer-s3");
+const dotenv = require('dotenv') ;
 const path = require ('path');
 const AWS = require('aws-sdk');
-const hash = require('object-hash');
+
+dotenv.config();
+
+export const api_version = process.env.API_VERSION;
+
 
 const bucket = 'tmcproject' ;
 
 const s3 = new AWS.S3({
-    apiVersion: '2006-03-01',
-    accessKeyId: 'AKIASVHJLVHPCJAGV76M',
-    secretAccessKey: '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',
-    region : 'ap-northeast-2'
+    apiVersion: progress.env.API_VERSION,
+    accessKeyId: progress.env.ACCESS_KEY_ID,
+    secretAccessKey: progress.env.SECRET_ACCESS_KEY,
+    region : progress.env.REGION
 });
 
 const upload = multer({
