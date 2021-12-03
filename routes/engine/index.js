@@ -9,7 +9,6 @@ const AWS = require('aws-sdk');
 
 dotenv.config();
 
-export const api_version = process.env.API_VERSION;
 
 
 const bucket = 'tmcproject' ;
