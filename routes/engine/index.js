@@ -10,6 +10,13 @@ require('dotenv').config();
 
 const bucket = 'tmcproject' ;
 
+
+console.log(process.env.API_VERSION);
+console.log(process.env.ACCESS_KEY_ID);
+console.log(process.env.SECRET_ACCESS_KEY);
+console.log(process.env.REGION);
+
+
 const s3 = new AWS.S3({
     apiVersion: process.env.API_VERSION,
     accessKeyId: process.env.ACCESS_KEY_ID,
