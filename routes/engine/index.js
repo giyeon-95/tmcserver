@@ -14,10 +14,10 @@ dotenv.config();
 const bucket = 'tmcproject' ;
 
 const s3 = new AWS.S3({
-    apiVersion: progress.env.API_VERSION,
-    accessKeyId: progress.env.ACCESS_KEY_ID,
-    secretAccessKey: progress.env.SECRET_ACCESS_KEY,
-    region : progress.env.REGION
+    apiVersion: process.env.API_VERSION,
+    accessKeyId: process.env.ACCESS_KEY_ID,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY,
+    region : process.env.REGION
 });
 
 const upload = multer({
