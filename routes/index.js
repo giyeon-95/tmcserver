@@ -8,6 +8,7 @@ const noticeRouter = require("./notice") ;
 const qnaRouter = require("./qna") ;
 const engineRouter = require('./engine'); 
 const roadmapRouter = require('./roadmap'); 
+const whitepaperRouter = require('./whitepaper'); 
 
 /* GET home page. */
 // router.get('/', function(req, res) {
@@ -22,6 +23,7 @@ router.use('/notice', noticeRouter );
 router.use('/qna', qnaRouter );
 router.use('/engine', engineRouter );
 router.use('/roadmap', roadmapRouter );
+router.use('/whitepaper',  whitepaperRouter);
 
 
 module.exports = router;
