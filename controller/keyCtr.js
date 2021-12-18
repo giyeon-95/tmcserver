@@ -43,12 +43,9 @@ const keyCtr = {
   bithumb: async (req, res) => {
     let useremail1 = "";
     const { bithumbC, bithumbS } = req.body;
-    console.log(req.body) ;
 
     const token = req.headers.access_token;
-
     
-
     if(!token){
       res.status(400).json({
         status: 400,
