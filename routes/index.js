@@ -7,6 +7,7 @@ const apiKeyRouter = require("./apiKey") ;
 const noticeRouter = require("./notice") ;
 const qnaRouter = require("./qna") ;
 const engineRouter = require('./engine'); 
+const roadmapRouter = require('./roadmap'); 
 
 /* GET home page. */
 // router.get('/', function(req, res) {
@@ -20,6 +21,7 @@ router.use('/jwt', jwtRouter );
 router.use('/notice', noticeRouter );
 router.use('/qna', qnaRouter );
 router.use('/engine', engineRouter );
+router.use('/roadmap', roadmapRouter );
 
 
 module.exports = router;
