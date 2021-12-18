@@ -32,7 +32,6 @@ const roadmapCtr = {
       console.log(e);
     }
 
-
     const exist = await Roadmap.findOne({_id : '61be1d93a558ca0669c18f18'});
 
     if(!exist){
@@ -53,7 +52,7 @@ const roadmapCtr = {
 
     }else{
         const update = { content: content};
-        await Roadamp.findOneAndUpdate({ _id : '61be1d93a558ca0669c18f18' }, update);
+        await Roadmap.findOneAndUpdate({ _id : '61be1d93a558ca0669c18f18' }, update);
         res.status(200).json({
             status: 200,
             result: true,
