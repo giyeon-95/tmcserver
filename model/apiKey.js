@@ -19,6 +19,6 @@ const apiKeySchema = new Schema ({
     bitfinexS : String, 
     bitflyerC: String,
     bitflyerS: String,
-})
+},{versionKey : false})
 
 module.exports= mongoose.model('apiKey', apiKeySchema);

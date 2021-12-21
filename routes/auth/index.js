@@ -21,5 +21,6 @@ router.post("/changepw", authCtr.changePW);
 router.get("/mypage", authCtr.mypage);
 router.post("/grading", authCtr.grading);
 router.get("/userinfo", authCtr.userInfo);
+router.get("/latestauthcount", authCtr.latesetAuthCount);
 
 module.exports = router;

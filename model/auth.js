@@ -8,6 +8,6 @@ const authSchema = new Schema ({
     grade : String,
     balance : Number,
     connected : Boolean,
-})
+},{timestamps : true, versionKey : false});
 
 module.exports= mongoose.model('auth', authSchema);

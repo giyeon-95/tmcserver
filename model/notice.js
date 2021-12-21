@@ -5,6 +5,6 @@ const noticeSchema = new Schema ({
     useremail : String, 
     title : String,
     content : String,
-},{timestamps : true});
+},{timestamps : true, versionKey : false});
 
 module.exports= mongoose.model('notice', noticeSchema);
