@@ -38,5 +38,8 @@ const upload = multer({
 router.get("/", engineCtr.engineList);
   
 router.post("/create", upload.single('app'), engineCtr.createEngine);
+router.post("/countup", engineCtr.countUp);
+
+
 
 module.exports = router;

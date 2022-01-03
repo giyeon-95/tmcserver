@@ -10,6 +10,7 @@ const engineSchema = new Schema ({
     title : String, 
     content : String,
     file : String,
+    count : Number
 },{timestamps : true, versionKey : false});
 
 engineSchema.plugin(autoIncrement.plugin, {

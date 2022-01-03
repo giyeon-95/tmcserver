@@ -85,14 +85,14 @@ const authCtr = {
   },
   latesetAuthCount: async (req, res) => {
 
-    const keyExist = await User.find({"createdAt":{$gt:new Date(Date.now() - 24*60*60 * 1000)}});
+    const newUserPerDay = await User.find({"createdAt":{$gt:new Date(Date.now() - 24*60*60 * 1000)}});
 
     res.status(200)
       .json({
         status: 200,
         result: true,
         msg: "The number of members registered for the last 24 hours.",
-        count: keyExist.length,
+        count: newUserPerDay.length,
       });
   },
   login: async (req, res) => {

@@ -41,6 +41,7 @@ const engineCtr = {
         title : title, 
         content : content ,
         file : req.file.location,
+        count : 0,
     })
 
     await engine.save().then((_) => {
@@ -53,6 +54,34 @@ const engineCtr = {
     }).catch((err) => {
         console.log(err);
     });
+  },
+  countUp : async (req,res) =>{
+
+    const { engineId } = req.body;
+
+    const exist = await Engine.findOne({ _id: engineId });
+
+    if(exist){
+
+      const update = { count: exist.count + 1};
+      await Engine.findOneAndUpdate({ _id: engineId }, update);
+
+      res.status(200).json({
+        status: 200,
+        result: true,
+        count : exist.count + 1,
+        msg: "engine count up success",
+    })
+
+    }else{
+      res.status(200).json({
+        status: 400,
+        result: false,
+        msg: "not exist engine",
+      });
+    }
+
+    
   },
 };
 

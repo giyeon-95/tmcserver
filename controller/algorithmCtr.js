@@ -46,7 +46,6 @@ const algorithmCtr = {
     const token = req.headers.access_token;
 
     const { data } = req.body;
-    console.log(req.body) ;
 
     if(!token){
       res.status(400).json({
