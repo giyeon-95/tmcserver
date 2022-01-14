@@ -29,7 +29,7 @@ const keyCtr = {
       res.status(200).json({
         status: 400,
         result: false,
-        msg: "get successed",
+        msg: "no user",
       });
     } else {
       res.status(200).json({
